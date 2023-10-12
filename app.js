@@ -5,10 +5,12 @@ const paginationEl = document.querySelector('#container-pagination')
 const counterEl = document.querySelector('#counter')
 const prevEl = document.querySelector('#prev')
 const nextEl = document.querySelector('#next')
+const btnBoxEl = document.querySelector('#pagination-box-btn')
+const btnTotal = btnBoxEl.querySelector('#total')
 
 let COMMENTS = []
 let totalCountComments = null
-const numberCommentsPerPage = 10
+let numberCommentsPerPage = 10
 let pageNumber = 1
 let numberOfPages = null
 
@@ -24,6 +26,19 @@ function filterChar() {
 // Вешаем слушатели на Input и на блок pagination
 inputEl.addEventListener('input', filterChar)
 paginationEl.addEventListener('click', changePrevNext)
+btnBoxEl.addEventListener('click', setNumberComments)
+
+// Пользователь выбирает количество показываемых комментариев
+function setNumberComments(e) {
+    e.preventDefault()
+    let activeBtn = btnBoxEl.querySelector('.active')
+    if (e.target.tagName === 'BUTTON') {
+        numberCommentsPerPage = Number(e.target.innerHTML)
+        e.target.classList.add('active')
+        activeBtn.classList.remove('active')
+    }
+    start()
+}
 
 // Устанавливаем значения кнопок prev next
 function setCountPage(prevNum, nexNum) {
@@ -34,20 +49,16 @@ function setCountPage(prevNum, nexNum) {
 function changePrevNext(e) {
     e.preventDefault()
     if (e.target.id === 'prev' && pageNumber > 1) {
-        // if (pageNumber > 1) {
         pageNumber--
         setCountPage(pageNumber, numberOfPages)
         inputEl.value = ''
-        start(pageNumber)
-        // }
+        start()
     }
     if (e.target.id == 'next' && pageNumber < numberOfPages) {
-        // if (pageNumber < numberOfPages) {
         pageNumber++
         setCountPage(pageNumber, numberOfPages)
         inputEl.value = ''
-        start(pageNumber)
-        // }
+        start()
     }
 }
 
@@ -60,6 +71,7 @@ async function start() {
             `https://jsonplaceholder.typicode.com/comments?_page=${pageNumber}&_limit=${numberCommentsPerPage}`
         )
         totalCountComments = resp.headers.get('X-Total-Count')
+        btnTotal.innerHTML = totalCountComments
         numberOfPages = Math.ceil(totalCountComments / numberCommentsPerPage)
         setCountPage(pageNumber, numberOfPages)
         let data = await resp.json()
