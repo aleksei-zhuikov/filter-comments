@@ -11,7 +11,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
   <title>Filter with selection and pagination</title>
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
 </head>
 
 <body class="bg-dark text-light">
@@ -19,11 +20,22 @@
     <h1>Список комментариев</h1>
     <input type="text" class="form-control mb-2" placeholder="Почта пользователя" id="filter" />
 
-    <ul class="list-group list-group-flush" id="list"></ul>
-    <div class="d-flex justify-content-center gap-3 my-3 d-none align-items-center" id="container-pagination">
-      <button id="prev" class="btn btn-light" type="button" disabled>&larr; Prev</button>
-      <div id="counter"></div>
-      <button id="next" class="btn btn-light" type="button">Next &rarr;</button>
+    <ul class="list-group list-group-flush text-wrap scroll" id="list"></ul>
+    <div id="container-pagination"
+      class="d-flex flex-column justify-content-center gap-3 my-3 d-none align-items-center">
+      <div class="text-wrap align-items-center">По сколько комментариев вам показывать</div>
+      <div class="pagination pagination-lg d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-outline-light active">10</button>
+        <button type="button" class="btn btn-outline-light">50</button>
+        <button type="button" class="btn btn-outline-light">100</button>
+        <button type="button" class="btn btn-outline-light">250</button>
+        <button type="button" class="btn btn-outline-light">500</button>
+      </div>
+      <div class="d-flex justify-content-center gap-3 align-items-center">
+        <button id="prev" class="btn btn-light" type="button" disabled>&larr; Prev</button>
+        <div id="counter"></div>
+        <button id="next" class="btn btn-light" type="button">Next &rarr;</button>
+      </div>
     </div>
   </div>
 </body>

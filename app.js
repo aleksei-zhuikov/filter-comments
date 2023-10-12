@@ -8,7 +8,7 @@ const nextEl = document.querySelector('#next')
 
 let COMMENTS = []
 let totalCountComments = null
-const numberCommentsPerPage = 5
+const numberCommentsPerPage = 10
 let pageNumber = 1
 let numberOfPages = null
 
