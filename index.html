@@ -18,7 +18,10 @@
 <body class="bg-dark text-light">
   <div class="container w-50 pt-3">
     <h1>Список комментариев</h1>
-    <input type="text" class="form-control mb-2" placeholder="Почта пользователя" id="filter" />
+    <div class="input-box">
+      <input type="text" class="form-control mb-2" placeholder="Почта пользователя" id="filter" />
+      <button id="clear" class="btn btn-sm btn-white input-box_btn-clear d-none">Х</button>
+    </div>
 
     <ul class="list-group list-group-flush text-wrap scroll" id="list"></ul>
     <div id="container-pagination"
