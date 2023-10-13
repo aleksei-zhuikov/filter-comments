@@ -7,6 +7,7 @@ const prevEl = document.querySelector('#prev')
 const nextEl = document.querySelector('#next')
 const btnBoxEl = document.querySelector('#pagination-box-btn')
 const btnTotal = btnBoxEl.querySelector('#total')
+const btnClearInpEl = document.querySelector('#clear')
 
 let COMMENTS = []
 let totalCountComments = null
@@ -17,6 +18,12 @@ let numberOfPages = null
 // Фильтрация по email
 function filterChar() {
     const valueChar = this.value
+    if (!valueChar) {
+        btnClearInpEl.classList.add('d-none')
+    } else {
+        btnClearInpEl.classList.remove('d-none')
+    }
+
     const filteredComments = COMMENTS.filter(comment => {
         return comment.email.toLowerCase().includes(this.value.toLowerCase())
     })
@@ -27,6 +34,14 @@ function filterChar() {
 inputEl.addEventListener('input', filterChar)
 paginationEl.addEventListener('click', changePrevNext)
 btnBoxEl.addEventListener('click', setNumberComments)
+btnClearInpEl.addEventListener('click', clearInput)
+
+// Очищаем Input
+function clearInput() {
+    inputEl.value = ''
+    btnClearInpEl.classList.add('d-none')
+    render(COMMENTS)
+}
 
 // Пользователь выбирает количество показываемых комментариев
 function setNumberComments(e) {
