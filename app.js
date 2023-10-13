@@ -48,9 +48,14 @@ function setNumberComments(e) {
     e.preventDefault()
     let activeBtn = btnBoxEl.querySelector('.active')
     if (e.target.tagName === 'BUTTON') {
-        numberCommentsPerPage = Number(e.target.innerHTML)
-        e.target.classList.add('active')
-        activeBtn.classList.remove('active')
+        if (e.target.classList.contains('active')) {
+            return
+        } else {
+            numberCommentsPerPage = Number(e.target.innerHTML)
+            e.target.classList.add('active')
+            activeBtn.classList.remove('active')
+        }
+
     }
     start()
 }
