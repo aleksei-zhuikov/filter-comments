@@ -52,12 +52,13 @@ function setNumberComments(e) {
             return
         } else {
             numberCommentsPerPage = Number(e.target.innerHTML)
+            pageNumber = 1
             e.target.classList.add('active')
             activeBtn.classList.remove('active')
         }
-
+        start()
     }
-    start()
+
 }
 
 // Устанавливаем значения кнопок prev next
